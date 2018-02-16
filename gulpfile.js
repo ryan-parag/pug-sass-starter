@@ -11,6 +11,7 @@ var gulp = require('gulp'),
 	pug_markdown_filter = require('jstransformer-markdown-it'),
 	notify = require('gulp-notify'),
 	plumber = require('gulp-plumber'),
+	stripCssComments = require ('gulp-strip-css-comments'),
 	sourcemaps  = require('gulp-sourcemaps');
 
 var paths = {
@@ -66,6 +67,7 @@ gulp.task('sass', function (){
   .pipe(sass(sassOptions))
   .pipe(prefix(prefixerOptions))
 		.pipe(concat('styles.css'))
+		.pipe(stripCssComments({ preserve: false }))
   .pipe(minifyCSS())
 		.pipe(gulp.dest(paths.css));
 });
